@@ -30,3 +30,5 @@ Visit [`http://127.0.0.1:5000/graphql`](http://127.0.0.1:5000/graphql) in your b
 - [GraphQL + Flask Tutorial](https://graphene-mongo.readthedocs.io/en/latest/tutorial.html)
 - [Intro to GraphQL](https://graphql.org/learn/)
 - [Learn GraphQL](https://www.howtographql.com)
+
+![test](./docs/assets/graph-visualization.jpg)
