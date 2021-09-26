@@ -14,6 +14,7 @@ Set up the development environment
 
 ```bash
 conda env create --file environment.yml
+conda activate cp-knowledge-graph
 pre-commit install
 ```
 
