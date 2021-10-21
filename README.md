@@ -28,7 +28,11 @@ Visit [`http://127.0.0.1:5000/graphql`](http://127.0.0.1:5000/graphql) in your b
 
 ## Web Scrapers
 
-The knowledge graph stays up to date by periodically running web scrapers that grab updated information from external sources. You can run these web scrapers by calling `python scrape_data.py`. To write your own web scraper, add a new Python file to the `scrapers` directory. The [`CollegeScraper`](./scrapers/college_scraper.py) works as a good example template to get started.
+The knowledge graph stays up to date by periodically running web scrapers that grab updated information from external sources. If you want to build your own scraper, the [`CollegeScraper`](./scrapers/college_scraper.py) works as a good example template to get started. All of the scrapers live in the `scrapers` folder. When you run `python app.py`, all scrapers will be loaded and run to populate the database before the API server starts. If you want to run specific scrapers only, you can pass a list of scrapers to the program. For example, `python app.py -s CollegeScraper MusicDepartmentScraper` will only run the college scraper and the music department scraper.
+
+## Visualizing the Knowledge Graph
+
+With the development server running, you can explore a visualization of the Cal Poly Knowledge Graph at [`http://127.0.0.1:5000/visualize`](http://127.0.0.1:5000/visualize).
 
 ## Resources
 

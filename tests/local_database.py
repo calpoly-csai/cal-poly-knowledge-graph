@@ -3,9 +3,6 @@ from mongoengine import connect
 
 from models import *
 
-# TODO: DELETE WHEN DONE
-import scrape_data
-
 connect("graphene-mongo-example", host="mongomock://localhost", alias="default")
 
 
@@ -182,6 +179,3 @@ The CDSM provides an opportunity for both statistics and computer science studen
 
     cs.curriculum = csc_courses
     cs.save()
-
-    # TODO: delete when done
-    scrape_data.main()

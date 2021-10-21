@@ -4,6 +4,7 @@ from flask import Flask, send_from_directory
 from flask_graphql import GraphQLView
 from schema import schema
 from argparse import ArgumentParser
+from scrape_data import scrape_data
 
 app = Flask(__name__, static_url_path="")
 app.debug = True
@@ -21,7 +22,9 @@ def display_api():
 if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("--prod", type=bool, default=False)
+    parser.add_argument("--scrapers", "-s", nargs="*", default=[])
     args = parser.parse_args()
     if not args.prod:
         init_db()
+        scrape_data(args.scrapers)
     app.run()
