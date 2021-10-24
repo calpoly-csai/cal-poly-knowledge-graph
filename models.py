@@ -41,7 +41,7 @@ class Department(Document):
     An area of study within a college. E.g. Computer Science Department
     """
 
-    meta = {"collection": "college"}
+    meta = {"collection": "department"}
     name = StringField(required=True)
     description = StringField()
     college = ReferenceField("College")
