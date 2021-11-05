@@ -143,6 +143,7 @@ class Professor(Document):
     sections = ListField(ReferenceField("Section"))
     office = ReferenceField("Room")
     office_hours = EmbeddedDocumentListField(OfficeHours)
+    website = StringField()
 
 
 class Course(Document):

@@ -5,10 +5,11 @@ import os
 from scraper import registry, Scraper
 from bs4 import BeautifulSoup as bsp
 import requests
+from scrapers.departmentscraper import DepartmentScraper
 
 # 1. Register your scraper so that it gets run by the scrape_data file. Make sure your class is a subclass of `Scraper`
 @registry.register
-class MusicDepartmentScraper(Scraper):
+class MusicDepartmentScraper(DepartmentScraper):
     """
     Fetches information about Cal Poly Music Department professors
     """
@@ -48,7 +49,7 @@ class MusicDepartmentScraper(Scraper):
                     bio = attributes[4].text.strip()  # "music area"
                     try:
                         prof = Professor.objects.get(name=name)
-                        prof.office = self.office_str_to_room(office)
+                        prof.office = office
                         prof.email = email
                         prof.phone_number = phone_number
                         prof.save()
@@ -77,7 +78,7 @@ class MusicDepartmentScraper(Scraper):
                 bio = attributes[3].text.strip()  # "music area"
                 try:
                     prof = Professor.objects.get(name=name)
-                    prof.office = self.office_str_to_room(office)
+                    prof.office = office
                     prof.email = email
                     prof.save()
                 except:
@@ -126,26 +127,3 @@ class MusicDepartmentScraper(Scraper):
             bio_set = set()
             bio_set.update(bio.split(", "))
             name_bio_dict[name] = bio_set
-
-    def office_str_to_room(self, office):
-        """converts office strings (e.g. '45-121') into room objects"""
-        # TODO: building number to building name utils?
-        # CURRENTLY BUILDING NAME IS JUST ITS NUMBER
-        split_string = office.split("-")
-        if len(split_string) == 2:
-            building_number = split_string[0]
-            room_number = split_string[1]
-        elif len(split_string) == 1 and split_string[0] != "":
-            building_number = office  # to handle the office = "45M" case
-            room_number = office
-        else:
-            return None
-        try:
-            room = Room.objects.get(
-                building_name=building_number, room_number=room_number
-            )
-            return room
-        except:
-            room = Room(building_name=building_number, room_number=room_number)
-            room.save()
-            return room
