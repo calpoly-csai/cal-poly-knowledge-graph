@@ -74,3 +74,4 @@ class CourseScraper(Scraper):
                 course_links[dept_name] = course_list
 
         return course_links
+    
