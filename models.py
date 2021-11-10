@@ -157,7 +157,7 @@ class Course(Document):
     # TODO: Should this be a list, since CSC 357 is also CPE 357
     course_id = StringField(required=True)
     department = ReferenceField("Department", required=True)
-    units = IntField(required=True)
+    units = IntField()
     prerequisites = ListField(ReferenceField("Course"))
     sections = ListField(ReferenceField("Section"))
     # TODO: Make Quarter enum

@@ -5,8 +5,10 @@ Create new web scrapers in the `scrapers` directory.
 
 from abc import ABC, abstractmethod
 
-class Scraper(ABC):
+from typing import Dict
 
+
+class Scraper(ABC):
     @abstractmethod
     def scrape(self):
         """
@@ -14,11 +16,14 @@ class Scraper(ABC):
         """
         pass
 
+
 class _ScraperRegistry:
     """
     Singleton class that collects references to all of the scrapers so that they can be easily run.
     """
-    _scrapers: dict[str, Scraper] = dict()
+
+    _scrapers: Dict[str, Scraper] = dict()
+
     def __len__(self):
         return len(self._scrapers)
 
@@ -26,21 +31,17 @@ class _ScraperRegistry:
         return list(self._scrapers.values())[index]
 
     @classmethod
-    def register(
-        cls, 
-        scraper
-    ):
+    def register(cls, scraper):
         """
         Adds scraper to the scraper registry
         """
         assert issubclass(
-                scraper, Scraper
-            ), "All scrapers must inherit from habitat_sim.utils.data.PoseExtractor"
+            scraper, Scraper
+        ), "All scrapers must inherit from habitat_sim.utils.data.PoseExtractor"
 
-        cls._scrapers[
-            scraper.__name__
-        ] = scraper
+        cls._scrapers[scraper.__name__] = scraper
 
         return scraper
+
 
 registry = _ScraperRegistry()
