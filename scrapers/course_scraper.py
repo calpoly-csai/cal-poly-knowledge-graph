@@ -27,6 +27,7 @@ class CourseScraper(Scraper):
                 "AERO 200. Special Problems for Undergraduates.",
                 "Individual investigation, research, studies, or surveys of selected problems.  Total credit limited to 4 units.",
                 "Aerospace Engineering (AERO)",
+                "1-4 units ",
             ]
             res = scraper.build(url=base_url, wanted_list=wanted)
             scraper.save(config_path)
@@ -41,6 +42,7 @@ class CourseScraper(Scraper):
             names = data[0]
             descriptions = data[1]
             scraped_department = data[2][0].split(" (")[0]
+            units = data[-1]
 
             # Check if the department exists in the database, if not create a new department
             query_department = Department.objects(name=scraped_department)
@@ -54,11 +56,13 @@ class CourseScraper(Scraper):
             for i in range(min(len(names), len(descriptions))):
                 course_id = names[i].split(".")[0]
                 course_name = names[i].split(". ")[1]
+                course_units = units[i].split(" units")[0]
                 try:
                     course = Course.objects.get(course_id=course_id)
                     course.description = descriptions[i]
                     course.course_id = course_id
                     course.department = department
+                    course.units = course_units
                     course.save()
                 except:
                     Course(
@@ -66,4 +70,5 @@ class CourseScraper(Scraper):
                         description=descriptions[i],
                         course_id=course_id,
                         department=department,
+                        units=course_units,
                     ).save()
