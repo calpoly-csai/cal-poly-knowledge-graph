@@ -147,7 +147,7 @@ The CDSM provides an opportunity for both statistics and computer science studen
             name="Fundamentals of Computer Science",
             course_id="CSC 101",
             description="Basic principles of algorithmic problem solving and programming using methods of top-down design, stepwise refinement and procedural abstraction. Basic control structures, data types, and input/output. Introduction to the software development process: design, implementation, testing and documentation. The syntax and semantics of a modern programming language.",
-            units=4,
+            units="4",
             usually_offered=["Fall", "Winter", "Spring"],
         )
     )
@@ -156,7 +156,7 @@ The CDSM provides an opportunity for both statistics and computer science studen
             name="Data Structures",
             description="Introduction to data structures and analysis of algorithms. Abstract datatypes. Specification and implementation of advanced data structures. Theoretical and empirical analysis of recursive and iterative algorithms. Software performance evaluation and testing techniques.",
             course_id="CSC 202",
-            units=4,
+            units="4",
             usually_offered=["Winter"],
         )
     )
@@ -165,7 +165,7 @@ The CDSM provides an opportunity for both statistics and computer science studen
             name="Project-Based Object-Oriented Programming and Design",
             description="Object-oriented programming and design with applications to project construction. Introduction to class design, interfaces, inheritance, generics, exceptions, streams, and testing.",
             course_id="CSC 203",
-            units=4,
+            units="4",
             usually_offered=["Winter"],
         )
     )
