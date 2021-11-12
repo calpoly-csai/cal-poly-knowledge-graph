@@ -63,7 +63,7 @@ class Program(Document):
     description = StringField()
     graduate_level = BooleanField(default=False)
     # e.g. major, minor TODO: make this an enum
-    type = StringField()
+    program_types = ListField(StringField())
     # TODO: maybe split this out into major support and GE courses
     curriculum = ListField(ReferenceField("Course"))
     department = ReferenceField("Department")
