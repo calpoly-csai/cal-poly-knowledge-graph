@@ -121,16 +121,21 @@ The CDSM provides an opportunity for both statistics and computer science studen
     cs_progs.append(Program(name="M.S. Computer Science", graduate_level=True))
     cs_progs.append(Program(name="B.S. Software Engineering"))
     cs_progs.append(Program(name="B.S. Software Engineering"))
-    cs_progs.append(Program(name="Computer Science Minor", type="minor"))
-    cs_progs.append(Program(name="Computing for Interactive Arts Minor", type="minor"))
+    cs_progs.append(Program(name="Computer Science Minor", program_types=["minor"]))
     cs_progs.append(
-        Program(name="Cross Disciplinary Studies Minor in Bioinformatics", type="minor")
+        Program(name="Computing for Interactive Arts Minor", program_types=["minor"])
+    )
+    cs_progs.append(
+        Program(
+            name="Cross Disciplinary Studies Minor in Bioinformatics",
+            program_types=["minor"],
+        )
     )
     cs_progs.append(
         Program(
             name="Cross Disciplinary Studies Minor in Data Science",
             description=data_sci_desc,
-            type="minor",
+            program_types=["minor"],
         )
     )
 
