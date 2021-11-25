@@ -10,7 +10,7 @@ from scrapers.departmentscraper import DepartmentScraper
 class ChemDepartmentScraper(DepartmentScraper):
 
     """
-    Fetches information about Cal Poly's Biological Sciences Department.
+    Fetches information about Cal Poly's Chemistry/Biochemistry Department.
     """
 
     links = {
