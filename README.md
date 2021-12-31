@@ -34,6 +34,9 @@ The knowledge graph stays up to date by periodically running web scrapers that g
 
 With the development server running, you can explore a visualization of the Cal Poly Knowledge Graph at [`http://127.0.0.1:5000/visualize`](http://127.0.0.1:5000/visualize).
 
+## Tests
+Tests are found in the `/tests` folder. To run tests, use the `python -m pytest` command in your terminal.
+
 ## Resources
 
 - [BeautifulSoup](https://scribbleghost.net/2020/07/06/getting-started-with-beautiful-soup-4/)
@@ -41,5 +44,6 @@ With the development server running, you can explore a visualization of the Cal 
 - [GraphQL + Flask Tutorial](https://graphene-mongo.readthedocs.io/en/latest/tutorial.html)
 - [Intro to GraphQL](https://graphql.org/learn/)
 - [Learn GraphQL](https://www.howtographql.com)
+- [PyTest](https://docs.pytest.org/en/6.2.x/)
 
 ![Graph Visualization](./docs/assets/graph-visualization.jpg)
