@@ -1,7 +1,7 @@
 """
 Top-level code for launching the CP Knowledge Graph server
 """
-from local_database import init_db
+from local_database import populate_db, start_db
 from flask import Flask, send_from_directory
 from flask_graphql import GraphQLView
 from schema import schema
@@ -30,6 +30,7 @@ if __name__ == "__main__":
     parser.add_argument("--scrapers", "-s", nargs="*", default=[])
     args = parser.parse_args()
     if not args.prod:
-        init_db()
+        start_db()
+        populate_db()
         scrape_data(args.scrapers)
     app.run()

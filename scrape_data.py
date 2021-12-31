@@ -5,13 +5,11 @@ Run file with `python scrape_data.py`
 
 import importlib
 import os
+from local_database import start_db
 from scraper import registry
 from mongoengine import connect
 from argparse import ArgumentParser
 from typing import List
-
-
-connect("graphene-mongo-example", host="mongomock://localhost", alias="default")
 
 
 def scrape_data(active_scrapers: List[str] = []):
@@ -38,5 +36,5 @@ if __name__ == "__main__":
         help="Space separated list of which scrapers to run. If omitted, all scrapers will run by default",
     )
     args = parser.parse_args()
-    print(args.scrapers)
+    start_db()
     scrape_data(args.scrapers)
