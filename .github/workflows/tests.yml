@@ -24,8 +24,6 @@ jobs:
           auto-update-conda: true
           python-version: ${{ matrix.python-version }}
           environment-file: environment.yml
-          activate-environment: test
-      - name: Install dependencies
-        run: conda install --file environment.yml
+          activate-environment: cp-knowledge-graph
       - name: Run Tests
         run: python -m pytest
