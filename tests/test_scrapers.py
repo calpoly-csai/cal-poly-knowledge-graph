@@ -31,11 +31,11 @@ def client():
     return Client(schema)
 
 
-# def test_run(client):
-#     """
-#     Ensure that all scrapers run.
-#     """
-#     scrape_data()
+def test_run(client):
+    """
+    Ensure that all scrapers run.
+    """
+    scrape_data()
 
 
 def test_college_scraper(client):
