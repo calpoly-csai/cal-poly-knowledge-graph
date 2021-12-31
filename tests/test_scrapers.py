@@ -4,6 +4,7 @@ from local_database import start_db
 from graphene.test import Client
 from schema import schema
 from typing import Callable, Union, Any, List
+from collections import OrderedDict
 
 
 def tree_map(
@@ -12,10 +13,10 @@ def tree_map(
     """
     Runs the provided function on the leaves of `query_result`
     """
-    if type(query_result) in [dict, list]:
+    if type(query_result) in [dict, list, OrderedDict]:
         results = []
         sub_query = (
-            query_result.values() if type(query_result) == dict else iter(query_result)
+            iter(query_result) if type(query_result) == list else query_result.values()
         )
         for query in sub_query:
             results += tree_map(f, query)
@@ -30,11 +31,11 @@ def client():
     return Client(schema)
 
 
-def test_run(client):
-    """
-    Ensure that all scrapers run.
-    """
-    scrape_data()
+# def test_run(client):
+#     """
+#     Ensure that all scrapers run.
+#     """
+#     scrape_data()
 
 
 def test_college_scraper(client):
