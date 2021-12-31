@@ -8,12 +8,13 @@ import os
 from scraper import registry
 from mongoengine import connect
 from argparse import ArgumentParser
+from typing import List
 
 
 connect("graphene-mongo-example", host="mongomock://localhost", alias="default")
 
 
-def scrape_data(active_scrapers):
+def scrape_data(active_scrapers: List[str] = []):
     scrapers_filenames = [
         file.split(".")[0] for file in os.listdir("scrapers") if file.endswith(".py")
     ]

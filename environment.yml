@@ -12,6 +12,7 @@ dependencies:
   - mongomock
   - python>=3.6
   - pip
+  - pytest
   - pip:
       - autoscraper
       - pre-commit

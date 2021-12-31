@@ -1,5 +1,7 @@
-# flask_graphene_mongo/app.py
-from tests.local_database import init_db
+"""
+Top-level code for launching the CP Knowledge Graph server
+"""
+from local_database import init_db
 from flask import Flask, send_from_directory
 from flask_graphql import GraphQLView
 from schema import schema
@@ -16,6 +18,9 @@ app.add_url_rule(
 
 @app.route("/visualize")
 def display_api():
+    """
+    Displays the GraphQL Voyager page that allows users to visually explore the API
+    """
     return send_from_directory("pages", "voyager.html")
 
 

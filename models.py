@@ -1,3 +1,6 @@
+"""
+Contains classes which describe the structure of the Mongo Database.
+"""
 # flask_graphene_mongo/models.py
 from mongoengine import Document, EmbeddedDocument
 from mongoengine.fields import (
