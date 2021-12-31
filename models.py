@@ -34,7 +34,7 @@ class College(Document):
     """
 
     meta = {"collection": "college"}
-    name = StringField(required=True)
+    name = StringField(required=True, primary_key=True)
     description = StringField()
     departments = ListField(ReferenceField("Department"), default=list)
 
@@ -45,7 +45,7 @@ class Department(Document):
     """
 
     meta = {"collection": "department"}
-    name = StringField(required=True)
+    name = StringField(required=True, primary_key=True)
     description = StringField()
     college = ReferenceField("College")
     programs = ListField(ReferenceField("Program"))
@@ -62,7 +62,7 @@ class Program(Document):
     """
 
     meta = {"collection": "program"}
-    name = StringField(required=True)
+    name = StringField(required=True, primary_key=True)
     description = StringField()
     graduate_level = BooleanField(default=False)
     # e.g. major, minor TODO: make this an enum
@@ -113,7 +113,7 @@ class Club(Document):
     """
 
     meta = {"collection": "club"}
-    name = StringField(required=True)
+    name = StringField(required=True, primary_key=True)
     officers = EmbeddedDocumentListField(Officer, required=True)
     email = StringField(regex=email_regex)
     phone = StringField(regex=phone_number_regex)

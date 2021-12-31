@@ -1,14 +1,22 @@
 # flask_graphene_mongo/database.py
-from mongoengine import connect
+from mongoengine import connect, connection
 
 from models import *
 
-connect("graphene-mongo-example", host="mongomock://localhost", alias="default")
 
-
-def init_db():
+def start_db():
     """
-    Creates test data in an local database for development purposes.
+    Launches a local in-memory database for development and testing.
+    """
+    try:
+        connection.get_connection()
+    except:
+        connect("csai-testing-server", host="mongomock://localhost", alias="default")
+
+
+def populate_db():
+    """
+    Adds test data in an local database
     """
     # Colleges
     engineering = College(
@@ -184,3 +192,7 @@ The CDSM provides an opportunity for both statistics and computer science studen
 
     cs.curriculum = csc_courses
     cs.save()
+
+
+if __name__ == "__main__":
+    start_db()
