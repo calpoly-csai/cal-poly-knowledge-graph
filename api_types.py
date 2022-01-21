@@ -76,3 +76,37 @@ class Course(MongoengineObjectType):
     class Meta:
         model = models.Course
         interfaces = (Node,)
+
+
+class CovidInfo(MongoengineObjectType):
+    """
+    An information about Covid-19 at Cal Poly
+    """
+
+    class Meta:
+        model = models.CovidInfo
+        interfaces = (Node,)
+
+
+class VaccinationStatus(MongoengineObjectType):
+    class Meta:
+        model = models.VaccinationStatus
+        interfaces = (Node,)
+
+
+class CovidIsolationQuarantineStatus(MongoengineObjectType):
+    class Meta:
+        model = models.CovidIsolationQuarantineStatus
+        interfaces = (Node,)
+
+
+class DailyCovidCasesDetail(MongoengineObjectType):
+    class Meta:
+        model = models.DailyCovidCasesDetail
+        interfaces = (Node,)
+
+
+class DailyCovidTestRecord(MongoengineObjectType):
+    class Meta:
+        model = models.DailyCovidTestRecord
+        interfaces = (Node,)
