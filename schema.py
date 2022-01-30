@@ -29,6 +29,7 @@ class Query(graphene.ObjectType):
     club = MongoengineConnectionField(Club)
     professor = MongoengineConnectionField(Professor)
     course = MongoengineConnectionField(Course)
+    covid_info = MongoengineConnectionField(CovidInfo)
 
 
 schema = graphene.Schema(query=Query)

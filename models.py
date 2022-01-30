@@ -11,6 +11,7 @@ from mongoengine.fields import (
     EnumField,
     GenericReferenceField,
     IntField,
+    FloatField,
     StringField,
     ReferenceField,
     EmbeddedDocumentField,
@@ -188,3 +189,62 @@ class Section(Document):
     professors = ListField(ReferenceField("Professor"))
     # TODO: Make enum of Quarter
     quarter = StringField()
+
+
+class VaccinationStatus(EmbeddedDocument):
+    """
+    Vaccination status at Cal Poly
+    """
+
+    group = StringField(required=True)
+    population = IntField(default=0)
+    vaccinated = IntField(default=0)
+    percentage_vaccinated = FloatField(default=0.0)
+
+
+class CovidIsolationQuarantineStatus(EmbeddedDocument):
+    """
+    Isolation/Quarantine status at Cal Poly
+    """
+
+    students_in_isolation = IntField(default=0)
+    students_in_quarantine = IntField(default=0)
+    students_in_quarantine_in_place = IntField(default=0)
+    beds_occupied = IntField(default=0)
+    beds_available = IntField(default=0)
+
+
+class DailyCovidCasesDetail(EmbeddedDocument):
+    """
+    Daily covid case stats at Cal Poly
+    """
+
+    num_students_on_campus = IntField(default=0)
+    num_students_off_campus = IntField(default=0)
+    num_symtomatic_cases = IntField(default=0)
+    num_asymptomatic_cases = IntField(default=0)
+
+
+class DailyCovidTestRecord(Document):
+    """
+    Daily covid test record at Cal Poly
+    """
+
+    date = DateTimeField(required=True, primary_key=True)
+    num_pos_tests = IntField(default=0)
+    num_tests = IntField(default=0)
+    daily_covid_cases = EmbeddedDocumentField("DailyCovidCasesDetail")
+
+
+class CovidInfo(Document):
+    """
+    An information about Covid-19 at Cal Poky
+    """
+
+    meta = {"collection": "covid-19"}
+    start_date = DateTimeField(required=True, primay_key=True)
+    vaccination_status = EmbeddedDocumentField("VaccinationStatus")
+    covid_isolation_quarantine_status = EmbeddedDocumentField(
+        "CovidIsolationQuarantineStatus"
+    )
+    daily_covid_test_record = ReferenceField("DailyCovidTestRecord")
