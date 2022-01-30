@@ -64,6 +64,9 @@ class Program(Document):
     meta = {"collection": "program"}
     name = StringField(required=True, primary_key=True)
     description = StringField()
+    department_head = StringField()
+    location = StringField()  # TODO: Make this a building type
+    phone_number = StringField(regex=phone_number_regex)
     graduate_level = BooleanField(default=False)
     # e.g. major, minor TODO: make this an enum
     program_types = ListField(StringField())
