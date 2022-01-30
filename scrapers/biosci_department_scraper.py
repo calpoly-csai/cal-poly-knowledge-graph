@@ -5,6 +5,7 @@ import requests
 from scraper import registry
 from scrapers.departmentscraper import DepartmentScraper
 import unicodedata
+import re
 
 
 @registry.register
@@ -72,30 +73,42 @@ class BioSciDepartmentScraper(DepartmentScraper):
                         # FIX NOON TO BE 12:00
                         if "Noon" in times:
                             times = times.replace("Noon", "12:00")
+                        if "noon" in times:
+                            times = times.replace("noon", "12:00")
 
                         if len(times) > 0:
                             # There is some text
                             if times[0].isdigit():
                                 # If the first character is a digit, there is a time period
-                                splitted_1 = times.split("-", 1)  # split for the dash
-                                splitted_2 = (splitted_1[1].strip()).split(
-                                    " ", 1
-                                )  # take the 2nd half and grab the end time
-                                start_time = splitted_1[0]
-                                end_time = splitted_2[0]
-                                if (
-                                    "pm" in end_time
-                                ):  # The case when there was a pm in the end time
-                                    end_time = end_time.replace("pm", "")
+                                try:
+                                    splitted_1 = times.split(
+                                        "-", 1
+                                    )  # split for the dash
+                                    splitted_2 = (splitted_1[1].strip()).split(
+                                        " ", 1
+                                    )  # take the 2nd half and grab the end time
+                                    start_time = splitted_1[0]
+                                    end_time = splitted_2[0]
+                                    if (
+                                        "pm" in end_time
+                                    ):  # The case when there was a pm in the end time
+                                        end_time = end_time.replace("pm", "")
 
-                                # Create new Office Hours object
-                                oh = OfficeHours(
-                                    start_time=start_time, end_time=end_time
-                                )
-                                if link != None:
-                                    oh.link = link
-                                oh.weekdays = days
-                                oh_all.append(oh)
+                                    # Start and End Time Format
+                                    r = re.compile(".{2}:.{2}")
+                                    # Create new Office Hours object
+                                    if r.match(start_time) and r.match(end_time):
+                                        # print(f"Start Time {start_time}")
+                                        # print(f"End Time{end_time}")
+                                        oh = OfficeHours(
+                                            start_time=start_time, end_time=end_time
+                                        )
+                                        if link != None:
+                                            oh.link = link
+                                        oh.weekdays = days
+                                        oh_all.append(oh)
+                                except:
+                                    continue
                 return oh_all
         return None
 
@@ -190,19 +203,24 @@ class BioSciDepartmentScraper(DepartmentScraper):
                                     p_text = p_tag.text
                                     if "Noon" in p_text:
                                         p_text = p_text.replace("Noon", "12:00")
-                                    splitted_1 = p_text.split(":", 1)  # Day : Times
-                                    splitted_2 = splitted_1[1].split(
-                                        "-", 1
-                                    )  # Start Time - End Time
-                                    day = [splitted_1[0].strip()]
-                                    start = splitted_2[0].strip()
-                                    end = splitted_2[1].strip()
+                                    if "noon" in p_text:
+                                        p_text = p_text.replace("noon", "12:00")
+                                    try:
+                                        splitted_1 = p_text.split(":", 1)  # Day : Times
+                                        splitted_2 = splitted_1[1].split(
+                                            "-", 1
+                                        )  # Start Time - End Time
+                                        day = [splitted_1[0].strip()]
+                                        start = splitted_2[0].strip()
+                                        end = splitted_2[1].strip()
 
-                                    oh = OfficeHours(start_time=start, end_time=end)
-                                    if link != None:
-                                        oh.link = link
-                                    oh.weekdays = day
-                                    oh_all.append(oh)
+                                        oh = OfficeHours(start_time=start, end_time=end)
+                                        if link != None:
+                                            oh.link = link
+                                        oh.weekdays = day
+                                        oh_all.append(oh)
+                                    except:
+                                        continue
                         if len(oh_all) > 0:
                             attributes["office_hours"] = oh_all
 
