@@ -74,7 +74,7 @@ def populate_db():
     ]
 
     cs_dep = Department(
-        name="Computer Science & Software Engineering",
+        name="Computer Science and Software Engineering",
         description=" degree in computer science prepares you to design and develop computer technologies such as operating systems, websites and mobile apps, artificial intelligence suites, software for robotics, search engines and more.Modern labs help you gain a practical understanding of computer science – from learning algorithmic problem solving to the high-level programming languages. Individual and team projects, as well as internships and co-ops throughout California's technology hubs, reinforce the concepts learned and provide you the opportunity to apply and communicate your knowledge. The program is accredited by the Engineering Accreditation Commission of ABET.",
     )
     eng_departments.append(cs_dep)
